@@ -1,0 +1,1540 @@
+/* Importamos fuentes limpias y modernas */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Montserrat:wght@400;600;700&display=swap');
+
+:root {
+    --verde-mate: #3A5A40;    /* Un verde selva más apagado y elegante */
+    --verde-claro: #A3B18A;   /* Para detalles suaves */
+    --blanco: #ffffff;
+    --gris-fondo: #f8f9fa;    /* Gris muy pálido para diferenciar secciones */
+    --texto-oscuro: #2b2b2b;  /* No usamos negro puro, cansa la vista */
+    --texto-gris: #666666;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { 
+    font-family: 'Lato', sans-serif; 
+    color: var(--texto-gris); 
+    background-color: var(--blanco);
+    line-height: 1.6;
+}
+
+h1, h2, h3, nav a, button { font-family: 'Montserrat', sans-serif; }
+
+/* --- HEADER MINIMALISTA --- */
+header {
+    background-color: var(--blanco);
+    padding: 0px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #eaeaea; /* Línea sutil */
+}
+
+.logo img {
+    height: 60px; /* Ajusta este número según qué tan grande lo quieras */
+    width: auto;  /* Esto mantiene la proporción para que no se estire */
+    display: block;
+}
+
+nav ul { display: flex; list-style: none; gap: 30px; }
+nav a { 
+    text-decoration: none; 
+    color: var(--texto-oscuro); 
+    font-size: 0.85rem; 
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+nav a:hover { color: var(--verde-mate); }
+
+/* --- HERO (Slider limpio) --- */
+.hero-container {
+    position: relative;
+    height: 80vh; /* No ocupa toda la pantalla para invitar a bajar */
+    width: 100%;
+    overflow: hidden;
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.9); /* Apenas oscurecido */
+    display: none;
+}
+.active { display: block; animation: fade 1.5s; }
+@keyframes fade { from {opacity: 0.8} to {opacity: 1} }
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    font-weight: 400; /* Letra fina se ve más limpia */
+    letter-spacing: 5px;
+    margin-bottom: 15px;
+}
+
+/* --- BARRA DE RESERVAS FLOTANTE (Clean) --- */
+.booking-container {
+    position: relative;
+    margin-top: -50px; /* Sube sobre el slider */
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.booking-form {
+    background: var(--blanco);
+    padding: 20px 40px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05); /* Sombra muy suave */
+    border-radius: 4px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--verde-mate);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.input-group input, .input-group select {
+    border: none;
+    border-bottom: 1px solid #ddd; /* Solo línea abajo */
+    padding: 5px 0;
+    font-family: 'Lato', sans-serif;
+    color: var(--texto-oscuro);
+    outline: none;
+    width: 160px;
+}
+
+button.btn-search {
+    background-color: var(--verde-mate);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+button.btn-search:hover { background-color: var(--texto-oscuro); }
+
+/* --- CONTENIDO GENERAL --- */
+.container {
+    max-width: 1000px;
+    margin: 5px auto;
+    text-align: center;
+    padding: 0 20px;
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--texto-oscuro);
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+p { font-size: 1.05rem; color: var(--texto-gris); max-width: 700px; margin: 0 auto; }
+
+/* --- GRILLA LIMPIA --- */
+.grid-clean {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.card-clean { text-align: left; }
+.card-img {
+    height: 220px;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.card-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.card-clean:hover img { transform: scale(1.05); }
+
+.card-clean h3 { font-size: 1.1rem; color: var(--texto-oscuro); margin-bottom: 5px; }
+.card-clean span { font-size: 0.9rem; color: var(--verde-mate); font-weight: bold; }
+
+/* Footer Minimalista */
+footer {
+    border-top: 1px solid #eaeaea;
+    padding: 40px;
+    text-align: center;
+    margin-top: 80px;
+    font-size: 0.8rem;
+}
+/* --- ESTILOS DEL CARRUSEL DE HABITACIONES --- */
+
+.carrusel-viewport {
+    overflow: hidden; /* Oculta lo que se sale del contenedor */
+    width: 100%;
+}
+
+.carrusel-track {
+    display: flex;
+    gap: 20px; /* Espacio entre tarjetas */
+    transition: transform 0.5s ease-in-out; /* Animación suave */
+}
+
+.card-carrusel {
+    /* Calculamos el 25% del espacio menos el hueco (gap) */
+    min-width: calc(50% - 15px); 
+    background: white;
+    text-align: left;
+    transition: transform 0.3s;
+}
+
+/* Imagen de la tarjeta */
+.card-carrusel .card-img {
+    height: 250px;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.card-carrusel .card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.card-carrusel:hover .card-img img {
+    transform: scale(1.1); /* Zoom suave al pasar el mouse */
+}
+
+.card-carrusel h3 {
+    font-size: 1.1rem;
+    color: var(--texto-oscuro);
+    margin-bottom: 5px;
+}
+
+.card-carrusel span {
+    font-size: 0.9rem;
+    color: var(--verde-mate);
+    font-weight: 700;
+}
+
+/* Botones del Carrusel (Flechas) */
+.carrusel-btn {
+    position: absolute;
+    top: 55%; /* Centrado verticalmente respecto a las imagenes */
+    transform: translateY(-50%);
+    background-color: white;
+    border: 1px solid #ddd;
+    color: var(--texto-oscuro);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Círculos */
+    cursor: pointer;
+    font-size: 1.2rem;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.carrusel-btn:hover {
+    background-color: var(--verde-mate);
+    color: white;
+}
+
+.btn-anterior { left: 0; }
+.btn-siguiente { right: 0; }
+
+/* Responsive: En celular mostramos solo 1 tarjeta a la vez */
+@media (max-width: 1100px) {
+    .card-carrusel {
+        min-width: calc(33.333% - 14px); /* En laptops medianas muestra 3 */
+    }
+}
+
+@media (max-width: 900px) {
+    .card-carrusel {
+        min-width: calc(50% - 10px); /* En tablets muestra 2 */
+    }
+}
+
+@media (max-width: 600px) {
+    .card-carrusel {
+        min-width: 100%; /* En celular muestra 1 */
+    }
+}
+/* --- ESTILOS DEL MODAL (VENTANA EMERGENTE) --- */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; 
+    z-index: 2000; /* Encima de todo */
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.6); /* Fondo negro semitransparente */
+    backdrop-filter: blur(5px); /* Efecto borroso elegante */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto; /* Centrado vertical */
+    padding: 0;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px; /* Ancho máximo */
+    box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+    animation: slideDown 0.4s;
+    position: relative;
+}
+
+@keyframes slideDown {
+    from {top: -100px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+.modal-header {
+    background: var(--verde-mate);
+    padding: 15px 20px;
+    color: white;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: white;
+}
+
+.close-btn {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 20px;
+}
+.close-btn:hover { color: #ccc; }
+
+.modal-body { padding: 20px 30px; }
+
+/* Inputs dentro del modal */
+.form-group-modal { margin-bottom: 15px; text-align: left; }
+.form-group-modal label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--texto-oscuro);
+}
+.form-group-modal input, .form-group-modal select, .form-group-modal textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Lato', sans-serif;
+}
+
+.btn-confirmar {
+    background-color: var(--verde-mate);
+    color: white;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.btn-confirmar:hover { background-color: var(--texto-oscuro); }
+
+/* --- ESTILOS PÁGINA CONTACTO --- */
+
+/* Hero específico para contacto (más bajo que el del inicio) */
+.contact-hero {
+    position: relative;
+    height: 400px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-hero img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7); /* Oscuro para leer el texto */
+    z-index: -1;
+}
+
+.contact-hero h1 {
+    color: white;
+    font-size: 3rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* Grilla de Contacto (Info + Formulario) */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+    gap: 50px;
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 20px;
+}
+
+/* Columna Izquierda: Información */
+.contact-info h3 {
+    color: var(--verde-mate);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.info-item i {
+    font-size: 1.5rem;
+    color: var(--verde-mate); /* Iconos verdes */
+    margin-top: 5px;
+}
+
+.info-item h4 {
+    margin-bottom: 5px;
+    color: var(--texto-oscuro);
+}
+
+.info-item p {
+    color: var(--texto-gris);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* Columna Derecha: Formulario */
+.contact-form-box {
+    background: #fff;
+    padding: 40px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.05); /* Sombra suave */
+    border-radius: 8px;
+}
+
+.contact-form-box input, 
+.contact-form-box textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    font-family: 'Lato', sans-serif;
+    outline: none;
+    transition: 0.3s;
+}
+
+.contact-form-box input:focus, 
+.contact-form-box textarea:focus {
+    border-color: var(--verde-mate);
+    background-color: #fff;
+}
+
+.btn-enviar {
+    background-color: var(--verde-mate);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.btn-enviar:hover { background-color: var(--texto-oscuro); }
+
+/* Mapa */
+.map-container {
+    width: 100%;
+    height: 450px;
+    margin-top: 50px;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    filter: grayscale(20%); /* Mapa un poco desaturado para elegancia */
+}
+
+/* Responsive para celulares */
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr; /* Una sola columna */
+        gap: 30px;
+    }
+    .contact-hero { height: 250px; }
+    .contact-hero h1 { font-size: 2rem; }
+}
+/* --- ESTILOS PÁGINA EL LODGE --- */
+
+/* Reutilizamos .page-hero para que todas las páginas internas se vean igual */
+.page-hero {
+    position: relative;
+    height: 450px; /* Altura elegante */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.page-hero img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.7); /* Oscurecer para leer texto */
+}
+
+.page-hero h1 {
+    color: white;
+    font-size: 3.5rem;
+    font-weight: 300; /* Letra fina elegante */
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+/* Sección Dividida (Texto | Imagen) */
+.split-section {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 80px auto;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.split-text {
+    flex: 1;
+    padding: 40px;
+    min-width: 300px;
+}
+
+.split-text h2 {
+    color: var(--verde-mate);
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.split-text p {
+    color: var(--texto-gris);
+    line-height: 1.8;
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+}
+
+.split-img {
+    flex: 1;
+    min-width: 300px;
+    height: 400px; /* Altura fija para uniformidad */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.split-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+.split-img:hover img { transform: scale(1.05); }
+
+/* Sección Servicios (Iconos) */
+.servicios-section {
+    background-color: #f9f9f9; /* Fondo gris suave */
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 40px;
+    max-width: 1000px;
+    margin: 50px auto 0;
+}
+
+.servicio-item i {
+    font-size: 2.5rem;
+    color: var(--verde-mate);
+    margin-bottom: 15px;
+}
+
+.servicio-item h4 {
+    color: var(--texto-oscuro);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-hero h1 { font-size: 2.5rem; }
+    .split-section { flex-direction: column; }
+    .split-text { padding: 20px 0; }
+    .split-img { width: 100%; height: 300px; }
+}
+/* --- ESTILOS DE LA GALERÍA --- */
+
+.galeria-section {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsivo automático */
+    gap: 30px; /* Espacio limpio entre fotos */
+}
+
+.foto-item {
+    position: relative;
+    height: 300px; /* Altura fija para que todas se vean iguales */
+    overflow: hidden;
+    border-radius: 8px; /* Bordes suaves */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+.foto-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Efecto al pasar el mouse: Zoom y brillo */
+.foto-item:hover img {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
+/* Opcional: Texto sobre la foto al pasar el mouse */
+.foto-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.foto-item:hover .foto-overlay {
+    opacity: 1;
+}
+/* --- BOTONES FLOTANTES (REDES SOCIALES) --- */
+
+.floating-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999; /* Para que siempre esté encima de todo */
+    display: flex;
+    flex-direction: column; /* Uno encima del otro */
+    gap: 15px; /* Espacio entre botones */
+}
+
+.social-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* Círculo perfecto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    font-size: 30px; /* Tamaño del ícono */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* Sombra elegante */
+    transition: all 0.3s ease;
+}
+
+/* Colores Oficiales */
+.whatsapp-btn {
+    background-color: #25D366;
+}
+
+.facebook-btn {
+    background-color: #1877F2;
+}
+
+/* Efecto Hover (Al pasar el mouse) */
+.social-btn:hover {
+    transform: scale(1.1) translateY(-5px); /* Se agranda y sube un poquito */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+
+/* RESPONSIVE: Ajuste para celulares */
+@media (max-width: 768px) {
+    .floating-container {
+        bottom: 20px;
+        right: 20px;
+        gap: 10px;
+    }
+    
+    .social-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+}
+/* =========================================
+   ESTILOS RESPONSIVE (PARA CELULARES)
+   ========================================= */
+
+/* Ocultar el botón de menú en PC */
+.menu-toggle {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    
+    /* --- 1. HEADER Y MENÚ --- */
+    header {
+        padding: 15px 20px;
+        justify-content: space-between;
+    }
+
+    .menu-toggle {
+        display: block;
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: var(--verde-mate); /* O el color principal que uses */
+    }
+
+    nav ul {
+        display: none; /* Oculto por defecto en celular */
+        flex-direction: column;
+        position: absolute;
+        top: 70px; /* Debajo del header */
+        left: 0;
+        width: 100%;
+        background-color: white;
+        text-align: center;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        padding: 20px 0;
+        z-index: 999;
+    }
+
+    /* Clase que agrega JS para mostrar el menú */
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 15px 0;
+    }
+
+    /* --- 2. HERO SLIDER --- */
+    .hero-container {
+        height: 60vh; /* Menos altura en celular */
+    }
+
+    .hero-text h1 {
+        font-size: 2rem; /* Título más pequeño */
+    }
+
+    /* --- 3. BARRA DE RESERVAS (Ahora vertical) --- */
+    .booking-container {
+        margin-top: 0;
+        padding: 20px;
+        background: #f4f4f4; /* Fondo suave para separar */
+    }
+
+    .booking-form {
+        flex-direction: column; /* Elementos uno debajo del otro */
+        padding: 20px;
+        width: 100%;
+        gap: 15px;
+    }
+
+    .input-group, .input-group input, .input-group select {
+        width: 100%; /* Ancho total */
+    }
+
+    #btnConsultar {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* --- 4. SERVICIOS Y CARDS --- */
+    .servicios-grid {
+        grid-template-columns: 1fr 1fr; /* 2 columnas en vez de muchas */
+    }
+
+    .container {
+        padding: 20px; /* Menos margen lateral */
+    }
+
+    /* --- 5. CARRUSEL --- */
+    .carrusel-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+    
+    /* --- 6. MODAL --- */
+    .modal-content {
+        width: 95%; /* Casi todo el ancho de la pantalla */
+        margin: 10% auto;
+    }
+    
+    /* --- 7. BOTONES FLOTANTES --- */
+    .floating-container {
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    .social-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+}
+/* --- ESTILO SELVA PREMIUM (Inspirado en Rústica/Guizado) --- */
+:root {
+    --verde-profundo: #1B4D3E; /* Verde oscuro elegante */
+    --verde-claro: #4CAF50;    /* Para detalles de éxito */
+    --madera: #8D6E63;         /* Tono tierra/madera */
+    --dorado: #C5A059;         /* Toque de lujo para botones/títulos */
+    --blanco: #ffffff;
+    --gris-claro: #f4f7f6;
+    --texto: #333333;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--texto);
+    background-color: var(--blanco);
+}
+
+/* Header más sofisticado */
+header {
+    background: rgba(255, 255, 255, 0.95); /* Transparencia sutil */
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    padding: 15px 5%;
+}
+
+nav a {
+    color: var(--verde-profundo);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+nav a:hover {
+    color: var(--dorado);
+    border-bottom: 2px solid var(--dorado);
+}
+
+/* Títulos con estilo */
+h2 {
+    color: var(--verde-profundo);
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Subtítulos decorativos (Línea debajo) */
+h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--dorado);
+    margin: 15px auto 30px;
+}
+
+/* Botones Premium */
+.btn-search, .btn-confirmar, .carrusel-btn {
+    background-color: var(--verde-profundo);
+    border-radius: 0; /* Botones cuadrados son más elegantes */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn-search:hover, .btn-confirmar:hover {
+    background-color: var(--dorado);
+    transform: translateY(-2px); /* Efecto elevación */
+}
+/* --- GRID EXPERIENCIAS --- */
+.grid-experiencias {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.card-exp {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.card-exp img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card-exp:hover img {
+    transform: scale(1.1); /* Zoom al pasar mouse */
+}
+
+.exp-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+}
+
+.exp-content h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--dorado);
+}
+/* --- SECCIÓN BUNGALOW ÚNICO --- */
+.bungalow-unico-section {
+    background-color: #F4F6F8; /* Fondo Plomo Suave */
+    padding: 80px 20px;
+    border-top: 1px solid #e1e4e8;
+}
+
+.ficha-bungalow {
+    background: #fff;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    display: flex;
+    overflow: hidden; /* Para que la imagen no se salga de las esquinas redondeadas */
+}
+
+/* --- ESTILOS DEL MINI SLIDER (IZQUIERDA) --- */
+.b-slider-container {
+    width: 55%; /* La foto ocupa el 55% del ancho */
+    position: relative;
+    background: #000;
+}
+
+.b-slide {
+    display: none; /* Se ocultan todas por defecto */
+    height: 100%;
+}
+
+.b-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 450px; /* Altura mínima para que se vea imponente */
+}
+
+/* Etiqueta sobre la foto */
+.b-tag {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    backdrop-filter: blur(5px);
+}
+
+/* Flechas del slider */
+.prev-b, .next-b {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    background-color: rgba(0,0,0,0.2);
+}
+.next-b { right: 0; border-radius: 3px 0 0 3px; }
+.prev-b:hover, .next-b:hover { background-color: rgba(0,0,0,0.8); }
+
+/* Animación suave */
+.fade { animation-name: fade; animation-duration: 1.5s; }
+
+/* --- DETALLES (DERECHA) --- */
+.b-detalles {
+    width: 45%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.b-detalles h3 {
+    color: var(--verde-profundo);
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--dorado);
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.b-detalles .descripcion {
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+/* Grilla de Iconos */
+.iconos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.icon-item {
+    font-size: 0.9rem;
+    color: #444;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.icon-item i { color: var(--dorado); width: 20px; text-align: center; }
+
+/* Precio y Botón */
+/* --- CORRECCIÓN DE PRECIO Y BOTÓN --- */
+
+.precio-action {
+    display: flex;
+    justify-content: space-between; /* Separa precio a la izq y botón a la der */
+    align-items: center; /* Centra verticalmente */
+    background: #ffffff;
+    border: 1px solid #e1e4e8; /* Borde sutil */
+    padding: 15px 25px;
+    border-radius: 12px;
+    margin-top: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.precio-box {
+    display: flex;
+    flex-direction: column; /* Pone "por noche" debajo del precio */
+    align-items: flex-start;
+    line-height: 1.1;
+}
+
+.precio-principal {
+    font-size: 2rem; /* Precio grande */
+    font-weight: 800;
+    color: var(--verde-profundo);
+    letter-spacing: -1px;
+}
+
+.precio-noche {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.btn-reservar-grande {
+    background-color: var(--verde-profundo);
+    color: white;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 6px; /* Bordes ligeramente redondeados */
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap; /* Evita que el texto del botón se parta en dos líneas */
+    box-shadow: 0 4px 10px rgba(27, 77, 62, 0.3); /* Sombra verde elegante */
+}
+
+.btn-reservar-grande:hover {
+    background-color: var(--dorado);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(197, 160, 89, 0.4);
+}
+
+/* Ajuste para celulares */
+@media (max-width: 600px) {
+    .precio-action {
+        flex-direction: row; /* Mantiene lado a lado en celular */
+        padding: 15px;
+        gap: 15px;
+    }
+    
+    .precio-principal {
+        font-size: 1.6rem;
+    }
+    
+    .btn-reservar-grande {
+        padding: 12px 20px;
+        font-size: 0.8rem;
+    }
+}
+/* --- GALERÍA DE DETALLES (BUNGALOWS) --- */
+
+.grid-galeria-b {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.item-g {
+    position: relative;
+    height: 250px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.item-g img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Efecto Zoom al pasar el mouse */
+.item-g:hover img {
+    transform: scale(1.1);
+}
+
+/* Texto pequeño sobre la foto */
+.item-g span {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background: rgba(255,255,255,0.9);
+    color: var(--verde-profundo);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.servicio-item i {
+    font-size: 2.5rem;
+    color: var(--verde-profundo); /* O el color verde que estés usando */
+    margin-bottom: 15px;
+    /* Esto ayuda a que todos los iconos ocupen el mismo ancho visual */
+    width: 50px; 
+    text-align: center;
+}
+/* --- NUEVA SECCIÓN DE VIDEO (MODERNO) --- */
+.video-section {
+    background-color: #f4f4f4; /* Fondo suave */
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.video-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #000;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2); /* Sombra elegante */
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Proporción 16:9 para YouTube */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Títulos más modernos */
+h2.titulo-moderno {
+    font-size: 2.5rem;
+    color: #2E5C38; /* Verde corporativo */
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+p.subtitulo-moderno {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Efecto hover en las tarjetas del carrusel */
+.card-carrusel {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-carrusel:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+/* --- ESTILOS DEL HEADER MEJORADO --- */
+
+.main-header {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Distribuye: Logo - Marquesina - Menú */
+    padding: 10px 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 80px; /* Altura fija para evitar saltos */
+}
+
+/* Logo */
+.logo img {
+    height: 80px; /* Ajusta según tu logo */
+    width: auto;
+    transition: transform 0.3s;
+}
+.logo img:hover { transform: scale(1.05); }
+
+/* --- MARQUESINA MODERNA (Scrolling Text) --- */
+.news-ticker {
+    flex-grow: 1; /* Ocupa el espacio disponible en el medio */
+    margin: 0 30px;
+    overflow: hidden; /* Oculta lo que se sale */
+    background-color: #f9f9f9; /* Fondo sutil */
+    border-radius: 20px;
+    padding: 8px 15px;
+    border: 1px solid #eee;
+    white-space: nowrap;
+    position: relative;
+    max-width: 600px; /* Que no sea gigante */
+}
+
+.ticker-wrapper {
+    display: inline-block;
+    padding-left: 100%; /* Empieza desde fuera a la derecha */
+    animation: ticker-scroll 25s linear infinite; /* 25s es la velocidad */
+}
+
+.ticker-item {
+    display: inline-block;
+    color: #2E5C38; /* Tu color verde */
+    font-weight: 600;
+    font-size: 0.9rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Animación de derecha a izquierda */
+@keyframes ticker-scroll {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
+
+/* --- MENÚ DE NAVEGACIÓN --- */
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.main-nav a:hover { color: #2E5C38; }
+
+/* Enlaces especiales (Admin/Correo) */
+.link-admin { font-size: 0.85rem; color: #777 !important; }
+.link-admin:hover { color: #333 !important; }
+.separador { color: #ddd; }
+
+/* =========================================
+   RESPONSIVE DESIGN (MÓVILES) - VERSIÓN DEFINITIVA
+   ========================================= */
+
+/* Botón Hamburguesa: Oculto en PC, visible en móvil */
+.menu-toggle { display: none; }
+
+@media (max-width: 900px) {
+
+     /* 1. AJUSTE DE LOGO (Para que no se vea gigante) */
+    .logo a {
+        display: block; /* Asegura que el enlace respete el tamaño */
+        line-height: 0; /* Elimina espacios extra abajo de la imagen */
+    }
+
+    .logo img {
+        height: 50px !important; /* Fuerza una altura pequeña en celular */
+        width: auto; /* Mantiene la proporción */
+        max-width: 180px; /* Evita que se estire a lo ancho */
+        object-fit: contain;
+    }
+
+    /* 2. HEADER FLEXIBLE (Para alinear logo y botón) */
+    .main-header {
+        display: flex;
+        justify-content: space-between; /* Logo a la izq, Botón a la der */
+        align-items: center;
+        padding: 10px 15px;
+        height: 70px; /* Altura fija para evitar saltos */
+        overflow: visible; /* Permitir que el menú salga del header */
+    }
+
+    /* 3. BOTÓN HAMBURGUESA (Asegurar que recibe el clic) */
+    .menu-toggle {
+        display: block !important;
+        font-size: 2rem;
+        cursor: pointer;
+        color: var(--verde-profundo); /* O #1B4D3E */
+        
+        /* ESTO ES VITAL: */
+        position: relative; 
+        z-index: 2000; /* Pone el botón ENCIMA del logo si se cruzan */
+        width: 40px; /* Zona de clic definida */
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+    }
+    
+    /* 1. Header flexible para que el botón entre */
+    .main-header {
+        position: relative;
+        padding: 10px 20px;
+        flex-wrap: wrap; /* Importante para evitar desbordes */
+    }
+
+    /* 2. Botón Hamburguesa visible */
+    .menu-toggle {
+        display: block;
+        font-size: 2rem;
+        cursor: pointer;
+        color: var(--verde-profundo);
+        order: 2; /* Asegura que esté a la derecha del logo si usas flex */
+    }
+
+    /* Ocultamos elementos de PC */
+    .news-ticker, .separador { display: none !important; }
+
+    /* 3. Menú Desplegable (Estilo Cajón) */
+    #nav-list {
+        display: none; /* Oculto por defecto */
+        flex-direction: column;
+        width: 100%;
+        background-color: white;
+        position: absolute;
+        top: 100%; /* Justo debajo del header */
+        left: 0;
+        z-index: 99999; /* Muy alto para estar encima del slider */
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        border-top: 3px solid var(--verde-profundo); /* Detalle visual */
+    }
+
+    /* 4. Clase ACTIVE: ¡Aquí ocurre la magia! */
+    #nav-list.active {
+        display: flex !important; /* Fuerza la visualización */
+    }
+
+    /* Estilo de los enlaces */
+    #nav-list li {
+        text-align: center;
+        border-bottom: 1px solid #f0f0f0;
+        margin: 0;
+        width: 100%;
+    }
+
+    #nav-list li a {
+        display: block;
+        padding: 15px;
+        color: #333;
+        font-size: 1.1rem; /* Letra un poco más grande para el dedo */
+    }
+    
+    /* --- AJUSTES BUNGALOW MÓVIL --- */
+    .ficha-bungalow { flex-direction: column !important; height: auto !important; }
+    .b-slider-container { width: 100% !important; height: 250px !important; }
+    .b-detalles { width: 100% !important; padding: 20px !important; }
+    .precio-action { flex-direction: column; gap: 15px; text-align: center; }
+    .btn-reservar-grande { width: 100%; }
+}
+
+/* --- ESTILOS DE PERMISOS MEJORADOS --- */
+        .permisos-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); /* 2 columnas exactas */
+            gap: 15px; /* Espacio entre filas y columnas */
+            background: #fdfdfd; 
+            padding: 20px; 
+            border-radius: 8px; 
+            border: 1px solid #e0e0e0; 
+            max-height: 300px; /* Si hay muchos, que haga scroll */
+            overflow-y: auto;
+        }
+
+        .permiso-item {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #eee;
+            transition: all 0.2s;
+        }
+
+        .permiso-item:hover {
+            border-color: #2ecc71;
+            background-color: #f0fdf4;
+        }
+
+        .permiso-item label { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; /* Espacio entre el cuadrito y el texto */
+            cursor: pointer; 
+            width: 100%;
+            font-size: 0.9rem;
+            margin: 0; /* Quitar margenes extraños */
+            font-weight: 500;
+            color: #333;
+        }
+
+        /* Hacemos el checkbox un poco más grande */
+        .permiso-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #2E5C38; /* Color verde al marcarlo */
+            cursor: pointer;
+            margin: 0; /* Quitar márgenes por defecto */
+        }
+        /* --- MENU MÓVIL (ESTILOS FALTANTES) --- */
+
+/* Ocultar botón hamburguesa en escritorio */
+.menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--texto-oscuro);
+}
+
+/* Media Query para Celulares */
+@media (max-width: 768px) {
+    header {
+        padding: 10px 5%;
+    }
+
+    .menu-toggle {
+        display: block; /* Aparece el botón en móvil */
+    }
+
+    .main-nav {
+        display: none; /* Ocultamos el menú por defecto */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        border-bottom: 2px solid var(--verde-mate);
+    }
+
+    /* Cuando el menú tiene la clase 'active' (se activa con el JS) */
+    .main-nav.active {
+        display: block;
+    }
+
+    nav ul {
+        flex-direction: column; /* Menú en lista vertical */
+        gap: 0;
+        padding: 20px 0;
+    }
+
+    nav ul li {
+        text-align: center;
+        padding: 15px 0;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .separador { display: none; } /* Ocultar el palito | en móvil */
+}

@@ -1,0 +1,68 @@
+/* --- ESTILOS RESPONSIVE DEL SIDEBAR --- */
+
+/* Botón flotante (Oculto en PC) */
+#adminMenuBtn {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 2001; /* Encima de todo */
+    background: #2E5C38;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+/* Botón cerrar dentro del menú */
+#closeAdminBtn {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+/* --- MÓVIL (Menos de 900px) --- */
+@media (max-width: 900px) {
+    
+    /* 1. Mostrar botón hamburguesa */
+    #adminMenuBtn { display: block; }
+    
+    /* 2. Ocultar Sidebar por defecto (fuera de pantalla) */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -260px; /* Escondido a la izquierda */
+        width: 250px;
+        height: 100vh;
+        z-index: 2002;
+        transition: left 0.3s ease; /* Animación suave */
+        overflow-y: auto;
+    }
+    
+    /* 3. Clase para mostrar el menú (JS la activa) */
+    .sidebar.mobile-active {
+        left: 0; /* Lo trae a la pantalla */
+        box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+    }
+    
+    /* 4. Mostrar la X de cerrar */
+    #closeAdminBtn { display: block; }
+
+    /* 5. Ajustar el contenido principal para que ocupe todo el ancho */
+    .main, .main-content {
+        width: 100%;
+        padding: 70px 15px 15px 15px; /* Espacio arriba para el botón */
+        margin: 0;
+    }
+    
+    /* Ajustes extras para tablas y grids en móvil */
+    table { display: block; overflow-x: auto; white-space: nowrap; }
+    .rack-grid, .grid-mesas, .kpi-grid, .charts-grid { grid-template-columns: 1fr !important; }
+}
